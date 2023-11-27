@@ -1,7 +1,7 @@
 ﻿using Neo4j.Driver;
 using Neo4jClient;
+using OmurusRecommender.Cyphers;
 using OmurusRecommender.Models.Interest;
-using OmurusRecommender.Queries;
 using OmurusRecommender.Services.Interfaces;
 using OmurusRecommender.Services.Interfaces.INeo4jProvider;
 using OmurusRecommender.Utils;
@@ -13,9 +13,7 @@ namespace OmurusRecommender.Services.Implementations.CreateInterestNode
 
         private readonly INeo4jProvider _neo4jProvider;
 
-        public CreateInterestNode(
-            INeo4jProvider neo4jProvider
-           )
+        public CreateInterestNode(INeo4jProvider neo4jProvider)
         {
             _neo4jProvider = neo4jProvider;
         }

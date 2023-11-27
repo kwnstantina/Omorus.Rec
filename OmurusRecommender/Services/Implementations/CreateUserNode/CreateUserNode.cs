@@ -1,6 +1,6 @@
 ﻿using Neo4j.Driver;
+using OmurusRecommender.Cyphers;
 using OmurusRecommender.Models.User;
-using OmurusRecommender.Queries;
 using OmurusRecommender.Services.Interfaces;
 using OmurusRecommender.Services.Interfaces.INeo4jProvider;
 using OmurusRecommender.Utils;

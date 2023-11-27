@@ -1,4 +1,4 @@
-﻿namespace OmurusRecommender.Queries
+﻿namespace OmurusRecommender.Cyphers
 {
 
     public class CypherQueries

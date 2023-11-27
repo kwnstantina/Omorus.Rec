@@ -7,6 +7,7 @@ C:\Users\kwnst\source\repos\OmurusRecommender\OmurusRecommender\bin\Debug\net6.0
 C:\Users\kwnst\source\repos\OmurusRecommender\OmurusRecommender\bin\Debug\net6.0\OmurusRecommender.pdb
 C:\Users\kwnst\source\repos\OmurusRecommender\OmurusRecommender\bin\Debug\net6.0\MediatR.dll
 C:\Users\kwnst\source\repos\OmurusRecommender\OmurusRecommender\bin\Debug\net6.0\MediatR.Contracts.dll
+C:\Users\kwnst\source\repos\OmurusRecommender\OmurusRecommender\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\kwnst\source\repos\OmurusRecommender\OmurusRecommender\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\kwnst\source\repos\OmurusRecommender\OmurusRecommender\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\kwnst\source\repos\OmurusRecommender\OmurusRecommender\bin\Debug\net6.0\Microsoft.OpenApi.dll
