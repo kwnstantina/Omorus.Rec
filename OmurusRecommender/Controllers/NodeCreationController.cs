@@ -1,13 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OmurusRecommender.Commands;
-using OmurusRecommender.Handlers.CommandHandlers;
-using OmurusRecommender.Models.Interest;
-using OmurusRecommender.Models.SubInterest;
+using OmurusRecommender.Models.DTOs;
+using OmurusRecommender.Models.Interests;
+using OmurusRecommender.Models.SubInterests;
 using OmurusRecommender.Models.User;
-using OmurusRecommender.Services.Implementations.Neo4jProvider;
-using OmurusRecommender.Services.Interfaces;
 using OmurusRecommender.Utils;
 
 namespace OmurusRecommender.Controllers
@@ -31,19 +28,30 @@ namespace OmurusRecommender.Controllers
         }
 
 
-        //[HttpPost("interest")]
-        //public IActionResult CreateInterest([FromBody] Interest interestModel)
-        //{
-        //    var createInterest = _createInterestNode.CreateNode(interestModel);
-        //    return Ok(createInterest);
-        //}
+        [HttpPost("interest")]
+        public async Task<IActionResult> CreateInterest([FromBody] Interest interestModel)
+        {
+            var command = new CreateInterestNodeCommand { InterestNode = interestModel };
+            var result = await _mediator.Send(command);
+            return Utilities.CreateActionResult(result);
+        }
 
-        //[HttpPost("subinterest")]
-        //public IActionResult CreateSubInterest([FromBody] SubInterest subInterestModel)
-        //{
-        //    var createSubInterest = _createSubInterestNode.CreateNode(subInterestModel);
-        //    return Ok(createSubInterest);
-        //}
+        [HttpPost("subinterest")]
+        public async Task<IActionResult> CreateSubInterest([FromBody] SubInterest subInterestModel)
+        {
+             var command = new CreateSubInterestNodeCommand { SubInterestNode = subInterestModel };
+            var result = await _mediator.Send(command);
+            return Utilities.CreateActionResult(result);
+        }
+
+
+        [HttpPost("user/interests/subinterests")]
+        public async Task<IActionResult> CreateInterestWithSubInterest([FromBody] UserInterestDTO userInterestSubInterestDTO)
+        {
+            var command = new CreateUserInterestNodeCommand { UserIntrestSubInterestNode = userInterestSubInterestDTO };
+            var result = await _mediator.Send(command);
+            return Utilities.CreateActionResult(result);
+        }
     }
 
 }

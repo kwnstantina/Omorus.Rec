@@ -1,4 +1,4 @@
-﻿namespace OmurusRecommender.Models.SubInterest
+﻿namespace OmurusRecommender.Models.SubInterests
 {
     public class SubInterest
     {

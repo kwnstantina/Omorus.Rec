@@ -1,12 +1,5 @@
 using MediatR;
-using OmurusRecommender.Models.Interest;
-using OmurusRecommender.Models.SubInterest;
-using OmurusRecommender.Models.User;
-using OmurusRecommender.Services.Implementations.CreateInterestNode;
-using OmurusRecommender.Services.Implementations.CreateSubInterestNode;
-using OmurusRecommender.Services.Implementations.CreateUserNode;
 using OmurusRecommender.Services.Implementations.Neo4jProvider;
-using OmurusRecommender.Services.Interfaces;
 using OmurusRecommender.Services.Interfaces.INeo4jProvider;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,9 +22,6 @@ builder.Services.AddSingleton<INeo4jProvider, Neo4jProvider>(provider =>
 });
 
 
-builder.Services.AddScoped<ICreateNode<Interest>, CreateInterestNode>();
-builder.Services.AddScoped<ICreateNode<SubInterest>, CreateSubInterestNode>();
-builder.Services.AddScoped<ICreateNode<User>, CreateUserNode>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 
