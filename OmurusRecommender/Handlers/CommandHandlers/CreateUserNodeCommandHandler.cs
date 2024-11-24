@@ -21,10 +21,18 @@ namespace OmurusRecommender.CommandHandlers
 
         public async Task<CommandResult> Handle(CreateUserNodeCommand request, CancellationToken cancellationToken)
         {
+
+            
             try
             {
                 var user = request.UserNode;
-                await using var session = _neo4jProvider.GetDriver().AsyncSession(action => action.WithDatabase("OmorusRec"));
+                // await using var session = _neo4jProvider.GetDriver().AsyncSession(action => action.WithDatabase("OmorusRec"));
+                // Create a Session for the `people` database
+
+                await using var session =  _neo4jProvider.GetDriver().AsyncSession();
+
+                var verify = _neo4jProvider.VerifyConnection();
+
                 var query = CypherQueries.CreateUser;
                 var parameters = new
                 {

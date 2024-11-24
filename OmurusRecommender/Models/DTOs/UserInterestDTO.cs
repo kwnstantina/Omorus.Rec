@@ -7,6 +7,5 @@ namespace OmurusRecommender.Models.DTOs
     {
         public Guid UserId { get; set; }
         public List<Interest>? Interests { get; set; }
-        public List<SubInterest>? Subinterests { get; set; }
     }
 }

@@ -25,11 +25,15 @@ namespace OmurusRecommender.Services.Implementations.Neo4jProvider
             if (_driver == null || _disposed)
             {
                 _driver = GraphDatabase.Driver(new Uri(_uri), AuthTokens.Basic(_username, _password));
+
             }
 
             return _driver;
         }
-
+        public async Task VerifyConnection()
+        {
+            await _driver.VerifyConnectivityAsync();
+        }
         public void Dispose()
         {
             if (!_disposed)

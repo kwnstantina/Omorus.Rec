@@ -20,12 +20,15 @@ namespace OmurusRecommender.CommandHandlers
             try
             {
                 var subInterest = request.SubInterestNode;
-                await using var session = _neo4jProvider.GetDriver().AsyncSession(action => action.WithDatabase("OmorusRec"));
-                var query = CypherQueries.CreateInterest;
+               // await using var session = _neo4jProvider.GetDriver().AsyncSession(action => action.WithDatabase("OmorusRec"));
+                await using var session = _neo4jProvider.GetDriver().AsyncSession();
+                var query = CypherQueries.CreateSubInterest;
                 var parameters = new
                 {
                     id = subInterest?.Id.ToString(),
                     title = subInterest?.Title,
+                    code = subInterest?.Code,
+                    interestId = subInterest?.InterestId.ToString(),
                    
                 };
                 var result = await session.ExecuteWriteAsync(

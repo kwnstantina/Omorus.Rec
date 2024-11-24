@@ -23,26 +23,23 @@ namespace OmurusRecommender.CommandHandlers
         {
             try
             {
-                await using var session = _neo4jProvider.GetDriver().AsyncSession(action => action.WithDatabase("OmorusRec"));
-                var query = CypherQueries.CreateUserInterest;
+                await using var session = _neo4jProvider.GetDriver().AsyncSession();
+                var query = CypherQueries.CreateUserInterests;
                 var parameters = new
                 {
-                    userId = request?.UserIntrestSubInterestNode?.UserId,
-                    interests = request?.UserIntrestSubInterestNode?.Interests?.Select(i => new { id = i.Id, title = i.Title }).ToList(),
-                    subinterests = request?.UserIntrestSubInterestNode?.Subinterests?.Select(si => new { id = si.Id, title = si.Title }).ToList()
+                    userId = request?.UserIntrestSubInterestNode?.UserId.ToString(),
+                    interests = request?.UserIntrestSubInterestNode?.Interests?.Select(i => new { id = i.Id.ToString()}).ToList(),
                 };
-                var result = await session.ExecuteWriteAsync(
+                 await session.ExecuteWriteAsync(
                     async transaction =>
                     {
                         var resultCursor = await transaction.RunAsync(query, parameters);
-                        return await resultCursor.SingleAsync();
+                       
                     });
 
-                var resultProperty = result.Values;
 
-                return resultProperty != null
-                    ? new CommandSuccessResult(ResultMessages.UserCreatedSuccessfully)
-                    : new CommandFailureResult(ResultMessages.QueryResultMissing);
+                return new CommandSuccessResult(ResultMessages.UserInterestCreatedSuccessfully);
+                 
             }
             catch (Exception ex)
             {

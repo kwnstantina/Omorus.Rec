@@ -8,27 +8,29 @@ using OmurusRecommender.Utils;
 
 namespace OmurusRecommender.CommandHandlers
 {
-    public class CreateSubIntrestNodeCommandHandler : IRequestHandler<CreateSubInterestNodeCommand, CommandResult>
+    public class CreateIntrerestNodeCommandHandler : IRequestHandler<CreateInterestNodeCommand, CommandResult>
     {
 
         private readonly INeo4jProvider _neo4jProvider;
 
-        public CreateSubIntrestNodeCommandHandler(INeo4jProvider neo4jProvider)
+        public CreateIntrerestNodeCommandHandler(INeo4jProvider neo4jProvider)
         {
             _neo4jProvider = neo4jProvider;
         }
 
-        public async Task<CommandResult> Handle(CreateSubInterestNodeCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(CreateInterestNodeCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var subInterest = request.SubInterestNode;
-                await using var session = _neo4jProvider.GetDriver().AsyncSession(action => action.WithDatabase("OmorusRec"));
+                var subInterest = request.InterestNode;
+               // await using var session = _neo4jProvider.GetDriver().AsyncSession(action => action.WithDatabase("OmorusRec"));
+                await using var session = _neo4jProvider.GetDriver().AsyncSession();
                 var query = CypherQueries.CreateInterest;
                 var parameters = new
                 {
                     id = subInterest?.Id.ToString(),
                     title = subInterest?.Title,
+                    code = subInterest?.Code,
                    
                 };
                 var result = await session.ExecuteWriteAsync(

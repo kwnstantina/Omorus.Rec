@@ -45,10 +45,34 @@ namespace OmurusRecommender.Controllers
         }
 
 
-        [HttpPost("user/interests/subinterests")]
-        public async Task<IActionResult> CreateInterestWithSubInterest([FromBody] UserInterestDTO userInterestSubInterestDTO)
+        [HttpPost("user/interest")]
+        public async Task<IActionResult> CreateUsertWithInterest([FromBody] UserInterestDTO userInterestSubInterestDTO)
         {
             var command = new CreateUserInterestNodeCommand { UserIntrestSubInterestNode = userInterestSubInterestDTO };
+            var result = await _mediator.Send(command);
+            return Utilities.CreateActionResult(result);
+        }
+
+        [HttpPost("interests/subInterests")]
+        public async Task<IActionResult> CreateInterestsWithSubInterests([FromBody] List<InterestSubInterestDTO> interestSubInterestDTO)
+        {
+            var command = new CreateInterestsSubInterestsNodeCommand { IntrestSubInterestNode = interestSubInterestDTO };
+            var result = await _mediator.Send(command);
+            return Utilities.CreateActionResult(result);
+        }
+
+        [HttpPost("interest/subInterest")]
+        public async Task<IActionResult> CreateInterestWithSubInterest([FromBody] InterestWithSubInterestForCreateDTO interestSubInterestDTO)
+        {
+            var command = new CreateInterestSubInterestNodeCommand { InterestSubInterestNode = interestSubInterestDTO };
+            var result = await _mediator.Send(command);
+            return Utilities.CreateActionResult(result);
+        }    
+        
+        [HttpPost("subInterests/relashionships")]
+        public async Task<IActionResult> CreateSubInterestsRelationships()
+        {
+            var command = new CreateSubInterestsRelationshipsNodeCommand { };
             var result = await _mediator.Send(command);
             return Utilities.CreateActionResult(result);
         }
