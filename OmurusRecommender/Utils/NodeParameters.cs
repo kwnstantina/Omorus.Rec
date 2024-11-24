@@ -2,14 +2,14 @@
 {
     public class NodeParameters<T>
     {
-        private readonly T _node;
+        private readonly T? _node;
 
-        public NodeParameters(T node)
+        public NodeParameters(T? node)
         {
             _node = node;
         }
 
-        public Dictionary<string, object> GetParameters()
+        public object GetParameters()
         {
             var parameters = new Dictionary<string, object>();
 
@@ -24,13 +24,17 @@
                     // Convert Guid to string if the property type is Guid
                     if (property.PropertyType == typeof(Guid) && value is Guid guidValue)
                     {
-                        parameters[property.Name] = guidValue.ToString();
+                        parameters[property.Name] = $"{property.Name.ToLower()}:{guidValue.ToString()}";
                     }
                     else
                     {
-                        parameters[property.Name] = value ?? DBNull.Value;
+                        parameters[property.Name] = $"{property.Name.ToLower()}:{value ?? DBNull.Value}";
                     }
                 }
+                return new
+                {
+                    parameters.Values
+                };
             }
 
             return parameters;
